@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+
+
+@theme {
+  /* Couleurs 3LM Solutions */
+  --color-primary: #005A9C;         /* Bleu Corporate */
+  --color-primary-foreground: #FFFFFF;
+
+  --color-secondary: #00C4CC;       /* Cyan / Turquoise */
+  --color-secondary-foreground: #0F172A;
+
+  --color-brand-blue: #005A9C;
+  --color-brand-cyan: #00C4CC;
+  --color-brand-dark: #0F172A;
+
+  /* Statuts de Tickets SAV */
+  --color-statut-ouvert: #F59E0B;   /* Amber */
+  --color-statut-encours: #2563EB;  /* Blue */
+  --color-statut-resolu: #10B981;   /* Emerald */
+  --color-statut-escalade: #9333EA; /* Purple */
+}
+
+@layer base {
+  :root {
+    --background: #F8FAFC;
+    --foreground: #0F172A;
+    --radius: 0.5rem;
+  }
+}

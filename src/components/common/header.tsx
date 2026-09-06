@@ -15,7 +15,7 @@ interface UserProfile {
 
 export function Header() {
   const [user, setUser] = useState<UserProfile | null>(null);
-  const { notifications, unreadCount, markRead, markAllRead, push } = useNotifications();
+  const { notifications, unreadCount, markRead, markAllRead } = useNotifications();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

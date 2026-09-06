@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, LoginFormData } from "@/types/auth";
@@ -14,7 +13,6 @@ import { AlertCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 export default function LoginPage() {
-  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -68,19 +66,17 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen w-full bg-slate-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-xl border-0">
+      <Card className="w-full max-w-md shadow-2xl border border-slate-100 rounded-2xl bg-white/95">
         <CardContent className="pt-8 pb-8 px-8 space-y-6">
           {/* Logo 3LM SOLUTIONS */}
           <div className="text-center space-y-2">
-            <div className="w-16 h-16 bg-brand-blue rounded-xl flex items-center justify-center font-bold text-2xl text-white mx-auto shadow-md border-2 border-brand-cyan/40">
+            <div className="w-16 h-16 rounded-xl flex items-center justify-center font-bold text-2xl text-white mx-auto shadow-md border-0 bg-gradient-to-br from-brand-blue to-brand-cyan">
               3LM
             </div>
             <h1 className="text-2xl font-bold text-brand-blue tracking-tight">
               3LM SOLUTIONS
             </h1>
-            <p className="text-xs text-slate-500">
-              Plateforme IA SAV & Support Technique
-            </p>
+            <p className="text-xs text-slate-500">Plateforme IA SAV & Support Technique</p>
           </div>
 
           {/* Message d'erreur global */}
@@ -144,7 +140,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-brand-cyan hover:bg-brand-cyan/90 text-slate-900 font-bold h-10 shadow-sm mt-2"
+            className="w-full bg-gradient-to-r from-brand-blue to-brand-cyan hover:opacity-95 text-white font-bold h-10 shadow-lg mt-2"
             >
               {isLoading ? (
                 <>

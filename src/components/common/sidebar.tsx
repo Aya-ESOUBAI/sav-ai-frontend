@@ -12,6 +12,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { authService } from "@/lib/auth-service";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { canAccessPath, normalizeRole, type Role } from "@/lib/rbac";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -23,6 +26,16 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [role, setRole] = useState<Role | null>(null);
+
+  useEffect(() => {
+    try {
+      const user = JSON.parse(Cookies.get("user") || "{}") as { role?: unknown };
+      setRole(normalizeRole(user.role));
+    } catch {
+      setRole(null);
+    }
+  }, []);
 
   const handleLogout = () => {
     authService.logout();
@@ -44,7 +57,7 @@ export function Sidebar() {
 
         {/* Menu de navigation */}
         <nav className="p-4 space-y-1.5">
-          {navigation.map((item) => {
+          {navigation.filter((item) => canAccessPath(role, item.href)).map((item) => {
             const isActive = pathname.startsWith(item.href);
             return (
               <Link

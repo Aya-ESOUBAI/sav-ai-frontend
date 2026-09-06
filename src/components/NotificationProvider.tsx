@@ -59,7 +59,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     if (typeof window !== "undefined" && "Notification" in window && Notification.permission === "granted") {
       try {
         new Notification(notif.title, { body: notif.body });
-      } catch (e) {}
+      } catch {}
     }
   };
 

@@ -9,9 +9,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   // Si l'utilisateur est sur l'écran de connexion (Maquette 1), afficher sans la navigation
-  const isLoginPage = pathname === "/login";
+  const isPublicAuthPage = pathname === "/login" || pathname === "/forgot-password";
 
-  if (isLoginPage) {
+  if (isPublicAuthPage) {
     return <main className="min-h-screen w-full">{children}</main>;
   }
 

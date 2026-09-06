@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { canAccessPath, roleFromCookie } from "@/lib/rbac";
 
 export default function middleware(request: NextRequest) {
   // Récupération du token JWT depuis les cookies
   const token = request.cookies.get("token")?.value;
+  const role = roleFromCookie(request.cookies.get("user")?.value);
   const { pathname } = request.nextUrl;
 
   // Liste des routes publiques (accessibles sans authentification)
@@ -20,6 +22,12 @@ export default function middleware(request: NextRequest) {
   // 2. Si l'utilisateur EST DÉJÀ authentifié et tente d'accéder à la page de connexion
   if (token && isPublicRoute) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  // Les pages d'administration sont réservées aux administrateurs, même si
+  // un utilisateur possède un token valide.
+  if (token && !isPublicRoute && !canAccessPath(role, pathname)) {
+    return NextResponse.redirect(new URL("/dashboard?unauthorized=1", request.url));
   }
 
   return NextResponse.next();

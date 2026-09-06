@@ -10,8 +10,7 @@ import { authService } from "@/lib/auth-service";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { User, ShieldCheck, Key, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { User, Key, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 // Dictionnaire de style et libellés par rôle utilisateur (Conception SAV)
 const roleConfig: Record<string, { label: string; badgeClass: string; desc: string }> = {
